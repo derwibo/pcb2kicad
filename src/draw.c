@@ -1148,6 +1148,7 @@ void
 DrawLayerGroup (int group, const BoxType *drawn_area)
 {
   int i, rv = 1;
+  int isnotes = 0;
   int layernum;
   LayerType *Layer;
   int n_entries = PCB->LayerGroups.Number[group];
@@ -1157,16 +1158,22 @@ DrawLayerGroup (int group, const BoxType *drawn_area)
     {
       layernum = layers[i];
       Layer = PCB->Data->Layer + layers[i];
+      //printf("DrawLayerGroup %s %d\n", Layer->Name, Layer->Type);
       if (strcmp (Layer->Name, "outline") == 0 ||
           strcmp (Layer->Name, "route") == 0)
         rv = 0;
+      if (Layer->Type == LT_NOTES)
+      {
+        isnotes = 1;
+      }
       if (layernum < max_copper_layer && Layer->On)
         DrawLayer (Layer, drawn_area);
     }
   if (n_entries > 1)
+  {
     rv = 1;
-
-  if (rv && !gui->gui)
+  }
+  if (rv && !isnotes && !gui->gui)
     DrawPPV (group, drawn_area);
 }
 
