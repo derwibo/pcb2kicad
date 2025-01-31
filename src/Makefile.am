@@ -14,7 +14,7 @@ EXTRA_LIBRARIES = \
 	libdrc.a \
 	libgtk.a liblesstif.a libbatch.a \
 	liblpr.a libgerber.a libbom.a libbom_md.a libpng.a libps.a libnelma.a \
-	libgcode.a libipcd356.a libgsvit.a
+	libgcode.a libipcd356.a libgsvit.a libkicad.a
 
 pcblib_DATA= \
 	default_font \
@@ -247,6 +247,7 @@ EXTRA_DIST= \
 	$(srcdir)/hid/gtk/hid.conf \
 	$(srcdir)/hid/gtk/pcb.rc \
 	$(srcdir)/hid/ipcd356/hid.conf \
+	$(srcdir)/hid/kicad/hid.conf \
 	$(srcdir)/hid/lesstif/hid.conf \
 	$(srcdir)/hid/lpr/hid.conf \
 	$(srcdir)/hid/png/hid.conf \
@@ -455,6 +456,11 @@ libbom_md_a_CPPFLAGS = -I$(top_srcdir)
 libbom_md_a_SOURCES = \
 	hid/hidint.h \
 	hid/bom_md/bom_md.c
+
+libkicad_a_CPPFLAGS = -I$(top_srcdir)
+libkicad_a_SOURCES = \
+	hid/hidint.h \
+	hid/kicad/kicad.c
 
 libipcd356_a_CPPFLAGS = -I$(top_srcdir)
 libipcd356_a_SOURCES = \
